@@ -2,7 +2,7 @@
 with add_priors as (
     select *,
            lag(input) over () as prior
-    from day01_data
+    from day01
 )
 select count(*)
 from add_priors
@@ -13,7 +13,7 @@ with add_two_priors as (
     select *,
            lag(input, 1) over () as one_prior,
            lag(input, 2) over () as two_prior
-    from day01_data
+    from day01
 ),
      full_windows as (
          select input + one_prior + two_prior as input

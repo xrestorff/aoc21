@@ -2,7 +2,7 @@
 with split_data as (
     select substr(input, 1, instr(input, ' ') - 1) as input,
            rightstr(input, 1)                        as value
-    from day02_data
+    from day02
 ),
      input_sums as (
          select sum(case when input = 'forward' then value else 0 end) as forward,
@@ -18,7 +18,7 @@ with base_data as (
     select substr(input, 1, instr(input, ' ') - 1) as input,
            rightstr(input, 1)                        as value,
            row_number() over ()                        as row_num
-    from day02_data
+    from day02
 ),
      add_sums as (
          select *,

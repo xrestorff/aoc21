@@ -4,7 +4,7 @@ with recursive
         select input,
                1                   as pos,
                substr(input, 1, 1) as bit
-        from day03_data
+        from day03
         union all
         select input,
                pos + 1,
@@ -21,11 +21,11 @@ with recursive
     add_rates as (
         select *,
                case
-                   when freq > (select count(*) / 2 from day03_data)
+                   when freq > (select count(*) / 2 from day03)
                        then 1
                    else 0 end                            as gamma,
                case
-                   when freq > (select count(*) / 2 from day03_data)
+                   when freq > (select count(*) / 2 from day03)
                        then 0
                    else 1 end                            as epsilon,
                row_number() over (order by pos desc) - 1 as pow
