@@ -1,7 +1,7 @@
 -- part one
 with split_data as (
-    select substr(input, 1, instr(input, ' ') - 1) as input,
-           rightstr(input, 1)                        as value
+    select substr(input, 1, position(' ' in input) - 1) as input,
+           right(input, 1)::integer                     as value
     from day02
 ),
      input_sums as (
@@ -15,9 +15,9 @@ from input_sums;
 
 -- part two
 with base_data as (
-    select substr(input, 1, instr(input, ' ') - 1) as input,
-           rightstr(input, 1)                        as value,
-           row_number() over ()                        as row_num
+    select substr(input, 1, position(' ' in input) - 1) as input,
+           right(input, 1)::integer                     as value,
+           row_number() over ()                         as row_num
     from day02
 ),
      add_sums as (

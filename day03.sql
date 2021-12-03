@@ -2,13 +2,13 @@
 with recursive
     bits as (
         select input,
-               1                   as pos,
-               substr(input, 1, 1) as bit
+               1                            as pos,
+               substr(input, 1, 1)::integer as bit
         from day03
         union all
         select input,
                pos + 1,
-               substr(input, pos + 1, 1)
+               substr(input, pos + 1, 1)::integer
         from bits
         where pos < length(input)
     ),
