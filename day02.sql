@@ -1,30 +1,30 @@
 -- part one
 with split_data as (
-    select substr(command, 1, instr(command, ' ') - 1) as command,
-           rightstr(command, 1)                        as value
+    select substr(input, 1, instr(input, ' ') - 1) as input,
+           rightstr(input, 1)                        as value
     from day02_data
 ),
-     command_sums as (
-         select sum(case when command = 'forward' then value else 0 end) as forward,
-                sum(case when command = 'down' then value else 0 end)    as down,
-                sum(case when command = 'up' then value else 0 end)      as up
+     input_sums as (
+         select sum(case when input = 'forward' then value else 0 end) as forward,
+                sum(case when input = 'down' then value else 0 end)    as down,
+                sum(case when input = 'up' then value else 0 end)      as up
          from split_data
      )
 select forward * (down - up)
-from command_sums;
+from input_sums;
 
 -- part two
 with base_data as (
-    select substr(command, 1, instr(command, ' ') - 1) as command,
-           rightstr(command, 1)                        as value,
+    select substr(input, 1, instr(input, ' ') - 1) as input,
+           rightstr(input, 1)                        as value,
            row_number() over ()                        as row_num
     from day02_data
 ),
      add_sums as (
          select *,
-                case when command = 'forward' then value else 0 end as forward,
-                case when command = 'down' then value else 0 end    as down,
-                case when command = 'up' then value else 0 end      as up
+                case when input = 'forward' then value else 0 end as forward,
+                case when input = 'down' then value else 0 end    as down,
+                case when input = 'up' then value else 0 end      as up
          from base_data
      ),
      add_aim as (
@@ -38,4 +38,4 @@ with base_data as (
          from add_aim
      )
 select sum(forward) * sum(depth)
-from add_depth
+from add_depth;
