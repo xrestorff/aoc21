@@ -145,7 +145,7 @@ with recursive
     ),
     winning_score as (
         select *,
-               (not mark1) ::int * input1 + (not mark2)::int * input2 + (not mark3)::int * input3 +
+               (not mark1)::int * input1 + (not mark2)::int * input2 + (not mark3)::int * input3 +
                (not mark4)::int * input4 +
                (not mark5)::int * input5 as unmarked_sum
         from game
